@@ -517,10 +517,11 @@
     function showThanks(rating) {
       $("screen-rate").classList.remove("active");
       if (rating >= 4) {
-        $("screen-positive").classList.add("active");
-      } else {
-        $("screen-negative").classList.add("active");
+        // 4-5 stars → redirect straight to Google review page (no intermediate screen)
+        window.location.href = CONFIG.GOOGLE_REVIEW_URL;
+        return;
       }
+      $("screen-negative").classList.add("active");
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
