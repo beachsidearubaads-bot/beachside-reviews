@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0E7490" />
+  <meta name="theme-color" content="#0E5F60" />
   <title>How was your stay? — Beachside Suites Aruba</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     /* =========================================================
        CONFIG — edit these two lines after you deploy the backend
@@ -15,20 +15,22 @@
     /* (see SETUP.md — these are HTML config vars below) */
 
     :root {
-      --teal-900: #134e4a;
-      --teal-700: #0f766e;
-      --teal-600: #0d9488;
-      --teal-50:  #f0fdfa;
-      --sand-50:  #fffbf5;
-      --sand-100: #fdf6ec;
-      --sand-200: #f5ead6;
-      --coral:    #f97316;
-      --gold:     #fbbf24;
-      --gold-dim: #e5e7eb;
-      --ink:      #0f172a;
-      --ink-soft: #475569;
-      --line:     #e2e8f0;
-      --white:    #ffffff;
+      /* Beachside Suites Aruba brand palette — pulled from logo */
+      --teal-900: #08484A;    /* deep wordmark teal */
+      --teal-700: #0E5F60;    /* primary brand */
+      --teal-600: #166769;
+      --teal-50:  #E8F4F4;    /* soft teal wash */
+      --aqua:     #3FAEB1;    /* shell ray accent */
+      --gold:     #C29C5F;    /* sand gold (active stars + accents) */
+      --gold-soft:#D9BC8B;
+      --gold-dim: #ECE0C8;    /* inactive star */
+      --sand-50:  #FBF8F2;    /* page background */
+      --sand-100: #F5EEDF;    /* input fields */
+      --sand-200: #ECDFC4;
+      --ink:      #1A2B2D;    /* deep neutral */
+      --ink-soft: #5B6766;
+      --line:     #E5DCC9;
+      --white:    #FFFFFF;
     }
 
     * { box-sizing: border-box; }
@@ -51,23 +53,32 @@
     }
 
     .header {
-      padding: 28px 24px 16px;
+      padding: 32px 24px 12px;
       text-align: center;
     }
 
-    .brand {
-      font-family: 'Fraunces', Georgia, serif;
-      font-weight: 700;
-      font-size: 22px;
-      color: var(--teal-900);
-      letter-spacing: -0.01em;
+    .brand-logo {
+      max-width: 240px;
+      width: 100%;
+      height: auto;
+      display: inline-block;
     }
-    .brand-sub {
-      font-size: 12px;
-      color: var(--ink-soft);
-      letter-spacing: 0.12em;
+    /* Fallback when logo.png is missing: render brand as text */
+    .brand-fallback {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 500;
+      font-size: 36px;
+      color: var(--teal-700);
+      letter-spacing: -0.005em;
+      line-height: 1;
+    }
+    .brand-fallback-sub {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 0.35em;
       text-transform: uppercase;
-      margin-top: 4px;
+      margin-top: 6px;
+      font-weight: 500;
     }
 
     main {
@@ -82,27 +93,42 @@
       width: 100%;
       max-width: 480px;
       background: var(--white);
-      border-radius: 24px;
-      padding: 32px 24px 28px;
-      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04),
-                  0 8px 24px rgba(15, 23, 42, 0.06);
+      border-radius: 20px;
+      padding: 36px 28px 30px;
+      box-shadow: 0 1px 2px rgba(8, 72, 74, 0.04),
+                  0 12px 32px rgba(8, 72, 74, 0.08);
+      position: relative;
+      text-align: center;
+    }
+    /* Gold hairline accent on the card */
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 0 0 2px 2px;
     }
 
     h1 {
-      font-family: 'Fraunces', Georgia, serif;
+      font-family: 'Cormorant Garamond', Georgia, serif;
       font-weight: 500;
-      font-size: 28px;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-      margin: 0 0 8px;
-      color: var(--ink);
+      font-size: 34px;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin: 4px 0 10px;
+      color: var(--teal-900);
     }
 
     .lede {
       color: var(--ink-soft);
       font-size: 15px;
-      line-height: 1.5;
-      margin: 0 0 24px;
+      line-height: 1.55;
+      margin: 0 auto 26px;
+      max-width: 360px;
     }
 
     .suite-tag {
@@ -131,7 +157,8 @@
       display: flex;
       justify-content: space-between;
       gap: 6px;
-      margin: 4px 0 8px;
+      margin: 8px auto 8px;
+      max-width: 360px;
       direction: rtl; /* so hover-from-right works without JS for a11y fallback */
     }
     .stars input { display: none; }
@@ -152,9 +179,9 @@
       max-width: 48px;
       max-height: 48px;
       fill: var(--gold-dim);
-      transition: fill 0.15s ease, transform 0.15s ease;
+      transition: fill 0.2s ease, transform 0.2s ease, filter 0.2s ease;
     }
-    .stars label:hover { background: rgba(251, 191, 36, 0.08); }
+    .stars label:hover { background: rgba(194, 156, 95, 0.08); }
     .stars label:active svg { transform: scale(0.92); }
 
     /* Fill stars from the chosen one rightward (RTL + sibling selector) */
@@ -167,7 +194,7 @@
     /* Subtle pop on selected stars */
     .stars input:checked ~ label svg {
       transform: scale(1.06);
-      filter: drop-shadow(0 2px 4px rgba(251, 191, 36, 0.4));
+      filter: drop-shadow(0 2px 4px rgba(194, 156, 95, 0.45));
     }
 
     .rating-hint {
@@ -177,19 +204,27 @@
       min-height: 20px;
       margin-top: 4px;
       transition: opacity 0.2s ease;
+      font-style: italic;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 16px;
     }
 
     /* ---------- forms ---------- */
     label.field-label {
       display: block;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
-      color: var(--ink);
-      margin: 18px 0 6px;
+      color: var(--teal-900);
+      margin: 20px 0 8px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-align: left;
     }
     label.field-label .optional {
       color: var(--ink-soft);
       font-weight: 400;
+      text-transform: none;
+      letter-spacing: normal;
     }
     input[type="text"],
     input[type="email"],
@@ -201,15 +236,16 @@
       background: var(--sand-100);
       border: 1.5px solid transparent;
       border-radius: 12px;
-      padding: 12px 14px;
-      transition: border-color 0.15s ease, background 0.15s ease;
+      padding: 13px 15px;
+      transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
     }
     input[type="text"]:focus,
     input[type="email"]:focus,
     textarea:focus {
       outline: none;
       background: var(--white);
-      border-color: var(--teal-600);
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(194, 156, 95, 0.12);
     }
     textarea {
       min-height: 110px;
@@ -224,25 +260,26 @@
       justify-content: center;
       gap: 8px;
       width: 100%;
-      padding: 14px 18px;
-      border-radius: 14px;
+      padding: 15px 18px;
+      border-radius: 12px;
       font-family: inherit;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
+      letter-spacing: 0.02em;
       border: none;
       cursor: pointer;
-      transition: transform 0.08s ease, box-shadow 0.15s ease, background 0.15s ease;
+      transition: transform 0.08s ease, box-shadow 0.18s ease, background 0.18s ease;
       -webkit-appearance: none;
     }
     .btn-primary {
       background: var(--teal-700);
       color: var(--white);
-      box-shadow: 0 4px 14px rgba(15, 118, 110, 0.25);
+      box-shadow: 0 4px 16px rgba(14, 95, 96, 0.28);
     }
-    .btn-primary:hover { background: var(--teal-900); }
+    .btn-primary:hover { background: var(--teal-900); box-shadow: 0 6px 20px rgba(14, 95, 96, 0.35); }
     .btn-primary:active { transform: translateY(1px); }
     .btn-primary:disabled {
-      background: #94a3b8;
+      background: #B8C2C0;
       cursor: not-allowed;
       box-shadow: none;
     }
@@ -252,13 +289,13 @@
       border: 1.5px solid var(--line);
       box-shadow: 0 1px 2px rgba(0,0,0,0.04);
     }
-    .btn-google:hover { background: var(--sand-100); }
+    .btn-google:hover { background: var(--sand-100); border-color: var(--gold-soft); }
     .btn-ghost {
       background: transparent;
       color: var(--ink-soft);
       font-weight: 500;
     }
-    .btn-ghost:hover { color: var(--ink); }
+    .btn-ghost:hover { color: var(--teal-700); }
 
     /* ---------- screens ---------- */
     .screen { display: none; animation: fadeIn 0.4s ease both; }
@@ -278,19 +315,22 @@
     .thanks-body {
       color: var(--ink-soft);
       font-size: 15px;
-      line-height: 1.55;
-      margin: 0 0 22px;
+      line-height: 1.6;
+      margin: 0 auto 24px;
+      max-width: 380px;
     }
-    .thanks-body strong { color: var(--ink); }
+    .thanks-body strong { color: var(--teal-900); }
 
     .button-stack > * + * { margin-top: 10px; }
 
     .footer {
       text-align: center;
-      padding: 12px 20px 24px;
-      color: var(--ink-soft);
-      font-size: 11px;
-      letter-spacing: 0.04em;
+      padding: 16px 20px 28px;
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      font-weight: 500;
     }
 
     /* loading spinner */
@@ -325,8 +365,13 @@
 <body>
 
   <header class="header">
-    <div class="brand">Beachside Suites</div>
-    <div class="brand-sub">Aruba</div>
+    <img src="logo.png" alt="Beachside Suites Aruba"
+         class="brand-logo"
+         onerror="this.style.display='none';document.getElementById('brand-text').style.display='block';" />
+    <div id="brand-text" style="display:none">
+      <div class="brand-fallback">Beachside</div>
+      <div class="brand-fallback-sub">Suites · Aruba</div>
+    </div>
   </header>
 
   <main>
@@ -422,7 +467,7 @@
     </div>
   </main>
 
-  <footer class="footer">BEACHSIDE SUITES · ARUBA</footer>
+  <footer class="footer">Beachside Suites · Aruba</footer>
 
   <script>
     /* =========================================================
